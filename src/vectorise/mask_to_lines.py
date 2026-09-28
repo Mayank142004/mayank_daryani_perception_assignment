@@ -23,21 +23,32 @@ class Vectoriser:
         # 1. Threshold
         ll_bin = ll_prob >= cfg['prob_threshold']
         
+        mask_gate_rejects = 0
         # 2. Gate with dilated drivable area
         if cfg['use_drivable_gate']:
             k_size = cfg['drivable_dilate_kernel']
             kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (k_size, k_size))
             da_dilated = cv2.dilate(da_mask.astype(np.uint8), kernel)
+            
+            # Count how many components are fully outside the drivable area
+            skel_before = skeletonize(ll_bin)
+            _, num_before = label(skel_before, return_num=True)
+            
             ll_bin = ll_bin & (da_dilated > 0)
             
-        # 3. Skeletonise
-        skeleton = skeletonize(ll_bin)
+            skel_after = skeletonize(ll_bin)
+            _, num_after = label(skel_after, return_num=True)
+            mask_gate_rejects = max(0, num_before - num_after)
+            
+        # 3. Skeletonise (use the one we already computed if gated)
+        skeleton = skel_after if cfg['use_drivable_gate'] else skeletonize(ll_bin)
         
         # 4. Label connected components
         labeled, num_components = label(skeleton, return_num=True)
         
         polylines = []
         reject_counts = {
+            'mask_gate': mask_gate_rejects,
             'min_pixels': 0,
             'min_vert_extent': 0,
             'max_wh_ratio': 0
