@@ -35,9 +35,9 @@ env/
 *.swp
 
 # Project specific
-data/
-outputs/
-weights/
+/data/
+/outputs/
+/weights/
 *.pt
 *.pth
 *.onnx

@@ -6,3 +6,4 @@ nuscenes-devkit
 scikit-image
 requests
 gdown
+pyyaml

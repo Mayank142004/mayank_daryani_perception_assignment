@@ -1,0 +1,3 @@
+dataset:
+  version: "v1.0-mini"
+  dataroot: "data/nuscenes"
