@@ -1,0 +1,8 @@
+torch
+torchvision
+numpy<2.0
+opencv-python
+nuscenes-devkit
+scikit-image
+requests
+gdown
