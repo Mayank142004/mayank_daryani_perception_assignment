@@ -25,3 +25,15 @@ stitch:
   max_misses: 3
   duplicate_gate_dist_m: 1.0
   duplicate_gate_angle_deg: 15.0
+
+topology:
+  min_lane_width: 2.0
+  max_lane_width: 5.0
+  min_overlap_m: 5.0
+  segment_length_m: 10.0
+  continuation_gate_dist: 2.0
+  continuation_gate_angle_deg: 30.0
+  split_merge_radius: 3.0
+  split_merge_angle_deg: 45.0
+  junction_search_radius: 10.0
+  junction_angle_deg: 90.0
