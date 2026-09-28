@@ -49,7 +49,8 @@ class YOLOPv2Segmenter(LaneSegmenter):
             
         # Extract masks
         da_mask_pad = torch.argmax(seg, dim=1).squeeze().cpu().numpy().astype(np.uint8)
-        ll_mask_pad = (ll.squeeze() > 0.5).cpu().numpy().astype(np.uint8)
+        # Keep raw probabilities for lane mask
+        ll_mask_pad = ll.squeeze().cpu().numpy().astype(np.float32)
 
         # Remove padding
         pad_w, pad_h = pad
@@ -64,7 +65,8 @@ class YOLOPv2Segmenter(LaneSegmenter):
 
         # Resize back to original size
         da_mask = cv2.resize(da_mask_crop, (orig_w, orig_h), interpolation=cv2.INTER_NEAREST)
-        ll_mask = cv2.resize(ll_mask_crop, (orig_w, orig_h), interpolation=cv2.INTER_NEAREST)
+        ll_mask = cv2.resize(ll_mask_crop, (orig_w, orig_h), interpolation=cv2.INTER_LINEAR)
+
 
         # Cache masks
         np.savez_compressed(str(cache_path), da_mask=da_mask, ll_mask=ll_mask)

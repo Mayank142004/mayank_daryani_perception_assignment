@@ -1,3 +1,11 @@
 dataset:
   version: "v1.0-mini"
   dataroot: "data/nuscenes"
+
+vectorise:
+  prob_threshold: 0.3
+  use_drivable_gate: true
+  drivable_dilate_kernel: 31
+  min_pixel_count: 20
+  min_vertical_extent: 20
+  max_wh_ratio: 5.0
