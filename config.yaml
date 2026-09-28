@@ -14,3 +14,14 @@ project:
   clip_x: [0.0, 50.0]
   clip_y: [-15.0, 15.0]
   confidence_decay_rate: 0.02
+
+stitch:
+  heading_n_points: 5
+  gate_dist_m: 1.5
+  gate_angle_deg: 45.0
+  cost_angle_weight: 1.0
+  bin_spacing_m: 0.5
+  savgol_polyorder: 2
+  max_misses: 3
+  duplicate_gate_dist_m: 1.0
+  duplicate_gate_angle_deg: 15.0
