@@ -9,3 +9,8 @@ vectorise:
   min_pixel_count: 20
   min_vertical_extent: 20
   max_wh_ratio: 5.0
+
+project:
+  clip_x: [0.0, 50.0]
+  clip_y: [-15.0, 15.0]
+  confidence_decay_rate: 0.02
